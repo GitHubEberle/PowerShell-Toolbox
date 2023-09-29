@@ -57,13 +57,13 @@ function CheckPSWindowsUpdate
 }
 function CheckPSDefenderModule
 {
-    $PSDefender = Get-Module -ListAvailable -Name PSDefender
+    $PSDefender = Get-Module -ListAvailable -Name WindowsDefender
     if ($null -eq $PSDefender)
     {
-        Install-Module -Name PSDefender -Force
+        Install-Module -Name WindowsDefender -Force
     }
-    Update-Module -Name PSDefender -Force -Verbose
-    Import-Module -Name PSDefender -Force -Verbose
+    Update-Module -Name WindowsDefender -Force -Verbose
+    Import-Module -Name WindowsDefender -Force -Verbose
 }
 #Reset Windows Update Components
 function ResetWindowsUpdate
@@ -78,7 +78,7 @@ function GetNewUpdates
 #Defender Update
 function UpdateDefender
 {
-    Update-MpSignature -Verbose -Force
+    Update-MpSignature -Verbose
 }
 #Main Function
 function MainFunction{
