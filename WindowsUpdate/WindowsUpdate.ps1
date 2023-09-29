@@ -55,6 +55,16 @@ function CheckPSWindowsUpdate
     Update-Module -Name PSWindowsUpdate -Force -Verbose
     Import-Module -Name PSWindowsUpdate -Force -Verbose
 }
+function CheckPSDefenderModule
+{
+    $PSDefender = Get-Module -ListAvailable -Name PSDefender
+    if ($null -eq $PSDefender)
+    {
+        Install-Module -Name PSDefender -Force
+    }
+    Update-Module -Name PSDefender -Force -Verbose
+    Import-Module -Name PSDefender -Force -Verbose
+}
 #Reset Windows Update Components
 function ResetWindowsUpdate
 {
@@ -65,14 +75,21 @@ function GetNewUpdates
 {
     Get-WindowsUpdate -MicrosoftUpdate -AcceptAll -Install -AutoReboot -Verbose
 }
+#Defender Update
+function UpdateDefender
+{
+    Update-MpSignature -Verbose -Force
+}
 #Main Function
 function MainFunction{
     Write-Host "Starting script to get all updates from Microsoft and clean Windows Update before..." -ForegroundColor Yellow -BackgroundColor Black
     Write-Host "PowerShell ist elevated: $IsAdmin and ExecutionPolicy is: $ExecutionPolicy" -ForegroundColor Yellow -BackgroundColor Black
     Write-Host "Starting procedure..." -ForegroundColor Yellow -BackgroundColor Black
     CheckPSWindowsUpdate
+    CheckPSDefenderModule
     ResetWindowsUpdate
     GetNewUpdates
+    UpdateDefender
     Read-Host "Press any key to continue..."
 }
 #Check if the script is started in silent mode or not
