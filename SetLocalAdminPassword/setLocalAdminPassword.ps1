@@ -1,6 +1,6 @@
 # Benutzername, Passwort und Beschreibung definieren
 $userToCheck = "edv-install"
-$newPassword = "XottoX789!"  # Ersetzen Sie dies durch Ihr gewünschtes Passwort
+$newPassword = "5#irtXywRZe9"  # Ersetzen Sie dies durch Ihr gewünschtes Passwort
 $userDescription = "Lokaler Administrator"  # Ersetzen Sie dies durch Ihre gewünschte Beschreibung
 
 # Passwort in ein SecureString konvertieren
@@ -17,7 +17,7 @@ try {
 
 } catch [Microsoft.PowerShell.Commands.UserNotFoundException] {
     # Benutzer existiert nicht, also wird er erstellt
-    $newUser = New-LocalUser -Name $userToCheck -Password $securePassword -AccountNeverExpires -UserMayNotChangePassword -Description $userDescription
+    New-LocalUser -Name $userToCheck -Password $securePassword -AccountNeverExpires -UserMayNotChangePassword -Description $userDescription
     Write-Output "Benutzer '$userToCheck' wurde erstellt mit der Beschreibung: '$userDescription'."
 
     # Benutzer zur Administratorengruppe hinzufügen
